@@ -50,6 +50,25 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="22dp" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="85dp"
+        android:background="#FFFFFF">
+
+        <TextView
+            android:id="@+id/textView6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Original Time"
+            tools:layout_editor_absoluteX="13dp"
+            tools:layout_editor_absoluteY="13dp" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
