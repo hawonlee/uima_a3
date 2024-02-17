@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.app.AlertDialog;
 import android.app.TimePickerDialog;
@@ -21,6 +22,7 @@ public class MainActivity extends AppCompatActivity {
 
     private Integer numHits;
     private SharedPreferences myPrefs;
+
     SharedPreferences.Editor peditor;
 
     Button timeButton;
@@ -28,25 +30,27 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        /*
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        timeButton = findViewById(R.id.timeButton);
 
         /* SharedPreferences at activity only level, not shared by others
         myPrefs = this.getPreferences(Activity.MODE_PRIVATE);
         */
 
-        /*
+
         Context context = getApplicationContext(); // app level storage
         myPrefs = context.getSharedPreferences(String.valueOf(R.string.context_prefs), Context.MODE_PRIVATE);
         peditor = myPrefs.edit();
         peditor.putInt("hitsValue", -1);
         peditor.apply();
-        */
 
+        /*
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        timeButton = findViewById(R.id.timeButton);
+        */
     }
 
     public void popTimePicker(View view)
@@ -75,7 +79,7 @@ public class MainActivity extends AppCompatActivity {
         super.onStart();
 
         numHits = myPrefs.getInt("hitsValue", 0);
-        TextView hits = (TextView) findViewById(R.id.hits_value);
+        //TextView hits = (TextView) findViewById(R.id.hits_value);
         //hits.setText(numHits.toString());
     }
 
