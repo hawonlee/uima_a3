@@ -16,4 +16,12 @@
     <string name="select_time">Select Time</string>
     <string name="home_time_zone">Home Time Zone</string>
     <string name="converted_time">Converted Time</string>
+    <string-array name="times_array">
+        <item>America/New_York</item>
+        <item>Europe/Berlin</item>
+        <item>Asia/Tokyo</item>
+        <item>Asia/Singapore</item>
+        <item>Australia/Canberra</item>
+        <item>India/Kolkata</item>
+    </string-array>
 </resources>
