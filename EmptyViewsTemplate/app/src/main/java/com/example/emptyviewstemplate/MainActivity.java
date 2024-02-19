@@ -5,12 +5,10 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Spinner;
-import android.widget.TextView;
-import android.app.AlertDialog;
 import android.app.TimePickerDialog;
-import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
 import android.widget.TimePicker;
 
@@ -18,7 +16,7 @@ import java.util.Locale;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
     private Integer numHits;
     private SharedPreferences myPrefs;
@@ -33,6 +31,11 @@ public class MainActivity extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        Spinner spinner = findViewById(R.id.spinner2);
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.times_array, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(adapter);
 
         timeButton = findViewById(R.id.timeButton);
 
@@ -118,6 +121,29 @@ public class MainActivity extends AppCompatActivity {
 
         Intent intent = new Intent(MainActivity.this, HitsActivity.class);
         startActivity(intent);
+    }
+
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        String text = parent.getItemAtPosition(position).toString();
+        if (text.equals("America/New_York")) {
+
+        } else if (text.equals("Europe/Berlin")) {
+
+        }else if (text.equals("Asia/Tokyo")) {
+
+        }else if (text.equals("Asia/Singapore")) {
+
+        }else if (text.equals("Australia/Canberra")) {
+
+        }else if (text.equals("India/Kolkata")) {
+
+        }
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
+
     }
 
 }
