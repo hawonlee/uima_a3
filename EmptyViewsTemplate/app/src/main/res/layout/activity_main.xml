@@ -39,16 +39,17 @@
 
         <Spinner
             android:id="@+id/spinner2"
-            android:layout_width="409dp"
-            android:layout_height="50dp"
+            android:layout_width="48dp"
+            android:layout_height="49dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.997"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.406" />
+            app:layout_constraintVertical_bias="0.404" />
 
         <TextView
-            android:id="@+id/textView7"
+            android:id="@+id/textView12"
             android:layout_width="210dp"
             android:layout_height="18dp"
             android:layout_marginTop="16dp"
@@ -59,7 +60,18 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/textView9"
+            android:id="@+id/textViewTimeHours"
+            android:layout_width="210dp"
+            android:layout_height="18dp"
+            android:layout_marginTop="84dp"
+            android:text="@string/current_time_zone"
+            app:layout_constraintEnd_toStartOf="@+id/spinner2"
+            app:layout_constraintHorizontal_bias="0.034"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/textViewCurrentZone"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/america_new_york"
@@ -81,7 +93,7 @@
             app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.63" />
+            app:layout_constraintVertical_bias="0.638" />
 
         <Button
             android:id="@+id/timeButton"
