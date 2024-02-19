@@ -93,7 +93,7 @@
             app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.638" />
+            app:layout_constraintVertical_bias="0.606" />
 
         <Button
             android:id="@+id/timeButton"
@@ -119,14 +119,13 @@
         android:layout_height="103dp">
 
         <ImageButton
-            android:id="@+id/imageButton"
+            android:id="@+id/convertButton"
             android:layout_width="390dp"
             android:layout_height="55dp"
             android:background="@android:drawable/arrow_down_float"
             android:backgroundTint="#00FFFFFF"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
 
             app:srcCompat="@android:drawable/ic_menu_recent_history"
@@ -191,12 +190,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="TextView"
+            android:textSize="20sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.501"
+            app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.614" />
+            app:layout_constraintVertical_bias="0.682" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout

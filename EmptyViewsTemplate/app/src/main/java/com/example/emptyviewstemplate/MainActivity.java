@@ -1,5 +1,6 @@
 package com.example.emptyviewstemplate;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -7,6 +8,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.app.TimePickerDialog;
 import android.widget.Button;
@@ -37,12 +39,21 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.times_array, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
+        spinner.setOnItemSelectedListener(this);
 
         timeButton = findViewById(R.id.timeButton);
 
         /* SharedPreferences at activity only level, not shared by others
         myPrefs = this.getPreferences(Activity.MODE_PRIVATE);
         */
+
+        ImageButton convert = (ImageButton)findViewById(R.id.convertButton);
+        convert.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                convertTime();
+            }
+        });
 
 
         Context context = getApplicationContext(); // app level storage
@@ -55,6 +66,12 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         */
+    }
+
+    public void convertTime() {
+        TextView timezone = (TextView) findViewById(R.id.textView10);
+        String time = hour + ":" + minute + "AM";
+        timezone.setText(time);
     }
 
     public void popTimePicker(View view)
@@ -81,6 +98,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     @Override
     protected void onStart() {
         super.onStart();
+
 
         //numHits = myPrefs.getInt("hitsValue", 0);
         //TextView hits = (TextView) findViewById(R.id.hits_value);
@@ -123,6 +141,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         startActivity(intent);
     }
 
+    @SuppressLint("SetTextI18n")
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         String text = parent.getItemAtPosition(position).toString();
