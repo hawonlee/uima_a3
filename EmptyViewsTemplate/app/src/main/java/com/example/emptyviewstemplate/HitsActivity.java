@@ -30,18 +30,24 @@ public class HitsActivity extends AppCompatActivity implements AdapterView.OnIte
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         String text = parent.getItemAtPosition(position).toString();
+        TextView timezone = (TextView) findViewById(R.id.textView4);
+
         if (text.equals("America/New_York")) {
-
-        } else if (text.equals("Europe/Berlin")) {
-
-        }else if (text.equals("Asia/Tokyo")) {
-
+            timezone.setText("GMT -05:00");
+        } else if (text.equals("America/Los_Angeles")) {
+            timezone.setText("GMT -08:00");
+        }else if (text.equals("Europe/Berlin")) {
+            timezone.setText("GMT +01:00");
+        }else if (text.equals("Europe/Istanbul")) {
+            timezone.setText("GMT +02:00");
         }else if (text.equals("Asia/Singapore")) {
-
+            timezone.setText("GMT +08:00");
+        }else if (text.equals("Asia/Tokyo")) {
+            timezone.setText("GMT +09:00");
         }else if (text.equals("Australia/Canberra")) {
-
-        }else if (text.equals("India/Kolkata")) {
-
+            timezone.setText("GMT +10:00");
+        }else {
+            timezone.setText("GMT +05:30");
         }
     }
 

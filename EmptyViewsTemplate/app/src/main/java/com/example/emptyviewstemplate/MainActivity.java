@@ -70,8 +70,9 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
     public void convertTime() {
         TextView timezone = (TextView) findViewById(R.id.textView10);
-        String time = hour + ":" + minute + "AM";
-        timezone.setText(time);
+        //int newHour =
+
+        timezone.setText(String.format(Locale.getDefault(), "%02d:%02d",hour, minute));
     }
 
     public void popTimePicker(View view)
@@ -82,8 +83,16 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             public void onTimeSet(TimePicker timePicker, int selectedHour, int selectedMinute)
             {
                 hour = selectedHour;
+
+                String am_pm = "am";
+                if (hour > 12) {
+                    am_pm = "pm";
+                    hour = hour % 12;
+                } else if (hour == 12) {
+                    hour = 12;
+                }
                 minute = selectedMinute;
-                timeButton.setText(String.format(Locale.getDefault(), "%02d:%02d",hour, minute));
+                timeButton.setText(String.format(Locale.getDefault(), "%02d:%02d %s",hour, minute, am_pm));
             }
         };
 
