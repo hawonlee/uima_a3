@@ -55,27 +55,35 @@ public class HitsActivity extends AppCompatActivity implements AdapterView.OnIte
         if (text.equals("America/New_York")) {
             timezone.setText("GMT -05:00");
             timezoneName.setText("America/New_York");
+            homeCityStr = "America/New_York";
         } else if (text.equals("America/Los_Angeles")) {
             timezone.setText("GMT -08:00");
             timezoneName.setText("America/Los_Angeles");
-        }else if (text.equals("Europe/Berlin")) {
+            homeCityStr = "America/Los_Angeles";
+        } else if (text.equals("Europe/Berlin")) {
             timezone.setText("GMT +01:00");
             timezoneName.setText("Europe/Berlin");
-        }else if (text.equals("Europe/Istanbul")) {
+            homeCityStr = "Europe/Berlin";
+        } else if (text.equals("Europe/Istanbul")) {
             timezone.setText("GMT +02:00");
             timezoneName.setText("Europe/Istanbul");
-        }else if (text.equals("Asia/Singapore")) {
+            homeCityStr = "Europe/Istanbul";
+        } else if (text.equals("Asia/Singapore")) {
             timezone.setText("GMT +08:00");
             timezoneName.setText("Asia/Singapore");
-        }else if (text.equals("Asia/Tokyo")) {
+            homeCityStr = "Asia/Singapore";
+        } else if (text.equals("Asia/Tokyo")) {
             timezone.setText("GMT +09:00");
             timezoneName.setText("Asia/Tokyo");
-        }else if (text.equals("Australia/Canberra")) {
+            homeCityStr = "Asia/Tokyo";
+        } else if (text.equals("Australia/Canberra")) {
             timezone.setText("GMT +10:00");
             timezoneName.setText("Australia/Canberra");
-        }else {
+            homeCityStr = "Australia/Canberra";
+        } else {
             timezone.setText("GMT +05:30");
             timezoneName.setText("Maldives/Male");
+            homeCityStr = "Maldives/Male";
         }
 
         homeCityStr = homeCity.getText().toString();
@@ -86,12 +94,22 @@ public class HitsActivity extends AppCompatActivity implements AdapterView.OnIte
     }
 
     @Override
+    protected void onPause() {
+        SharedPreferences.Editor peditor = myPrefs.edit();
+        peditor.putString("homeCity", homeCityStr);
+        peditor.apply();
+
+        super.onPause();
+    }
+
+    @Override
     public void onNothingSelected(AdapterView<?> parent) {
 
     }
 
     public void mainActivity(View view) {
         Intent intent = new Intent(HitsActivity.this, MainActivity.class);
+        intent.putExtra("newHomeCity", homeCityStr);
         startActivity(intent);
     }
 }

@@ -11,12 +11,14 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.app.TimePickerDialog;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.TimePicker;
 
+import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -38,6 +40,8 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     int hour, minute;
 
     private String homeCity;
+
+    private ImageView warning;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,11 +75,9 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         convertTime();
 
         TextView convertTimeZone = (TextView) findViewById(R.id.textView5);
-        //convertTimeZone.setText();
 
-        /* SharedPreferences at activity only level, not shared by others
-        myPrefs = this.getPreferences(Activity.MODE_PRIVATE);
-        */
+        warning = (ImageView) findViewById(R.id.imageView);
+        warning.setVisibility(View.INVISIBLE);
 
         ImageButton convert = (ImageButton)findViewById(R.id.convertButton);
         convert.setOnClickListener(new View.OnClickListener() {
@@ -104,8 +106,6 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         TextView timezone = (TextView) findViewById(R.id.textView5);
         int newHour = hour;
         int newMin = minute;
-
-
 
         if (isEmpty(homeCity)) {
             timezone.setText("GMT -08:00");
@@ -162,6 +162,13 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         TextView convertedTime = (TextView) findViewById(R.id.textView10);
         String setConvertedTime = String.format(Locale.getDefault(), "%02d:%02d",newHour, minute) + " " + am_pm;
         convertedTime.setText(setConvertedTime);
+
+        warning = (ImageView) findViewById(R.id.imageView);
+        if ((newHour >= 11 && am_pm.equals("pm")) || (newHour <= 7 && am_pm.equals("am"))) {
+            warning.setVisibility(View.VISIBLE);
+        } else {
+            warning.setVisibility(View.INVISIBLE);
+        }
     }
 
     public void popTimePicker(View view)
@@ -197,10 +204,9 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     protected void onStart() {
         super.onStart();
 
-
-        //numHits = myPrefs.getInt("hitsValue", 0);
-        //TextView hits = (TextView) findViewById(R.id.hits_value);
-        //hits.setText(numHits.toString());
+        homeCity = myPrefs.getString("homeCity", "");
+        //TextView homeTimeZone = (TextView) findViewById(R.id.textView4);
+        //homeTimeZone.setText(homeCity);
     }
 
     @Override
@@ -211,6 +217,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     @Override
     protected void onPause() {
 
+        peditor.putString("homeCity", homeCity);
         peditor.apply();
 
         super.onPause();
@@ -268,6 +275,41 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     @Override
     public void onNothingSelected(AdapterView<?> parent) {
 
+    }
+
+    @SuppressLint("SetTextI18n")
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        TextView timezone = (TextView) findViewById(R.id.textView4);
+        TextView timezoneName = (TextView) findViewById(R.id.textView5);
+
+        homeCity = data.getStringExtra("newHomeCity");
+        if (homeCity.equals("America/New_York")) {
+            timezone.setText("GMT -05:00");
+            timezoneName.setText("America/New_York");
+        } else if (homeCity.equals("America/Los_Angeles")) {
+            timezone.setText("GMT -08:00");
+            timezoneName.setText("America/Los_Angeles");
+        }else if (homeCity.equals("Europe/Berlin")) {
+            timezone.setText("GMT +01:00");
+            timezoneName.setText("Europe/Berlin");
+        }else if (homeCity.equals("Europe/Istanbul")) {
+            timezone.setText("GMT +02:00");
+            timezoneName.setText("Europe/Istanbul");
+        }else if (homeCity.equals("Asia/Singapore")) {
+            timezone.setText("GMT +08:00");
+            timezoneName.setText("Asia/Singapore");
+        }else if (homeCity.equals("Asia/Tokyo")) {
+            timezone.setText("GMT +09:00");
+            timezoneName.setText("Asia/Tokyo");
+        }else if (homeCity.equals("Australia/Canberra")) {
+            timezone.setText("GMT +10:00");
+            timezoneName.setText("Australia/Canberra");
+        }else {
+            timezone.setText("GMT +05:30");
+            timezoneName.setText("India/Kolkata");
+        }
     }
 
     public void settings(View view) {
