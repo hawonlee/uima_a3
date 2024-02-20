@@ -18,6 +18,7 @@
     <string name="converted_time">Converted Time</string>
     <string name="textview">TextView</string>
     <string name="home_converted_time">Converted Time</string>
+    <string name="america_los_angeles">America/Los_Angeles</string>
     <string-array name="times_array">
         <item>America/New_York</item>
         <item>America/Los_Angeles</item>

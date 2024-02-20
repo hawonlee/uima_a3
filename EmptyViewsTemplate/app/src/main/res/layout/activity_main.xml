@@ -86,7 +86,7 @@
         <TextView
             android:id="@+id/textView8"
             android:layout_width="84dp"
-            android:layout_height="16dp"
+            android:layout_height="29dp"
             android:text="@string/original_time"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -116,7 +116,7 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="103dp">
+        android:layout_height="65dp">
 
         <ImageButton
             android:id="@+id/convertButton"
@@ -126,8 +126,10 @@
             android:backgroundTint="#00FFFFFF"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
 
+            app:layout_constraintHorizontal_bias="0.476"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@android:drawable/ic_menu_recent_history"
             tools:srcCompat="@android:drawable/ic_menu_recent_history" />
 
@@ -135,7 +137,7 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="222dp"
+        android:layout_height="179dp"
         android:background="#FFFFFF"
         android:backgroundTint="#FFFFFF">
 
@@ -153,15 +155,16 @@
 
         <TextView
             android:id="@+id/textView4"
-            android:layout_width="150dp"
+            android:layout_width="264dp"
             android:layout_height="31dp"
-            android:text="@string/textview"
+            android:text="@string/america_los_angeles"
+            android:textSize="24sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.061"
+            app:layout_constraintHorizontal_bias="0.053"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.205" />
+            app:layout_constraintVertical_bias="0.219" />
 
         <TextView
             android:id="@+id/textView5"
@@ -173,12 +176,12 @@
             app:layout_constraintHorizontal_bias="0.045"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.381" />
+            app:layout_constraintVertical_bias="0.418" />
 
         <TextView
             android:id="@+id/textView6"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="101dp"
+            android:layout_height="34dp"
             android:text="@string/converted_time"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -196,7 +199,7 @@
             app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.682" />
+            app:layout_constraintVertical_bias="0.769" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -208,12 +211,13 @@
             android:layout_width="78dp"
             android:layout_height="56dp"
             android:backgroundTint="#00FFFFFF"
+            android:onClick="settings"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.951"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.761"
+            app:layout_constraintVertical_bias="0.0"
             app:srcCompat="@android:drawable/ic_menu_manage" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 

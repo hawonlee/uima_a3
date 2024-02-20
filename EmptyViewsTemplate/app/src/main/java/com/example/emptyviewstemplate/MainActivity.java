@@ -29,6 +29,8 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     Button timeButton;
     int hour, minute;
 
+    private String homeCity;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -56,20 +58,21 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         });
 
 
-        Context context = getApplicationContext(); // app level storage
-        myPrefs = context.getSharedPreferences(String.valueOf(R.string.context_prefs), Context.MODE_PRIVATE);
-        peditor = myPrefs.edit();
-        peditor.putInt("hitsValue", -1);
-        peditor.apply();
+        myPrefs = getApplicationContext().getSharedPreferences("myUserPrefs", Context.MODE_PRIVATE);
+        homeCity = myPrefs.getString("homeCity", "");
 
         /*
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        set ContentView(R.layout.activity_main);
         */
     }
 
     public void convertTime() {
         TextView timezone = (TextView) findViewById(R.id.textView10);
+        SharedPreferences.Editor peditor = myPrefs.edit();
+
+
+
         //int newHour =
 
         timezone.setText(String.format(Locale.getDefault(), "%02d:%02d",hour, minute));
@@ -155,30 +158,43 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         String text = parent.getItemAtPosition(position).toString();
         TextView timezone = (TextView) findViewById(R.id.textViewTimeHours);
-        //timezonecurrent = myPrefs.
+        TextView timezoneName = (TextView) findViewById(R.id.textViewCurrentZone);
 
         if (text.equals("America/New_York")) {
             timezone.setText("GMT -05:00");
+            timezoneName.setText("America/New_York");
         } else if (text.equals("America/Los_Angeles")) {
             timezone.setText("GMT -08:00");
+            timezoneName.setText("America/Los_Angeles");
         }else if (text.equals("Europe/Berlin")) {
             timezone.setText("GMT +01:00");
+            timezoneName.setText("Europe/Berlin");
         }else if (text.equals("Europe/Istanbul")) {
             timezone.setText("GMT +02:00");
+            timezoneName.setText("Europe/Istanbul");
         }else if (text.equals("Asia/Singapore")) {
             timezone.setText("GMT +08:00");
+            timezoneName.setText("Asia/Singapore");
         }else if (text.equals("Asia/Tokyo")) {
             timezone.setText("GMT +09:00");
+            timezoneName.setText("Asia/Tokyo");
         }else if (text.equals("Australia/Canberra")) {
             timezone.setText("GMT +10:00");
+            timezoneName.setText("Australia/Canberra");
         }else {
             timezone.setText("GMT +05:30");
+            timezoneName.setText("India/Kolkata");
         }
     }
 
     @Override
     public void onNothingSelected(AdapterView<?> parent) {
 
+    }
+
+    public void settings(View view) {
+        Intent intent = new Intent(MainActivity.this, HitsActivity.class);
+        startActivity(intent);
     }
 
 }
