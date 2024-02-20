@@ -1,6 +1,8 @@
 package com.example.emptyviewstemplate;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
@@ -18,14 +20,20 @@ public class HitsActivity extends AppCompatActivity implements AdapterView.OnIte
     private Integer hits;
     private TextView msg;
     private SharedPreferences myPrefs;
-    private EditText homeCity;
-    String homeCityStr;
+    SharedPreferences.Editor peditor;
+    private TextView homeCity;
+    private String homeCityStr;
 
     protected void onCreate(Bundle savedInstanceState) {
+
+        Intent intent = getIntent();
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_hits);
 
         myPrefs = getSharedPreferences("myUserPrefs", Context.MODE_PRIVATE);
+
+        homeCityStr = myPrefs.getString("homeCity", "");
 
         Spinner spinner = findViewById(R.id.spinner1);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.times_array, android.R.layout.simple_spinner_item);
@@ -33,10 +41,11 @@ public class HitsActivity extends AppCompatActivity implements AdapterView.OnIte
         spinner.setAdapter(adapter);
         spinner.setOnItemSelectedListener(this);
 
-        homeCity = findViewById(R.id.textView8);
-        spinner.setOnItemSelectedListener(this);
+        homeCity = (TextView) findViewById(R.id.textView3);
+        //spinner.setOnItemSelectedListener(this);
     }
 
+    @SuppressLint("SetTextI18n")
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         String text = parent.getItemAtPosition(position).toString();
@@ -66,20 +75,24 @@ public class HitsActivity extends AppCompatActivity implements AdapterView.OnIte
             timezoneName.setText("Australia/Canberra");
         }else {
             timezone.setText("GMT +05:30");
-            timezoneName.setText("India/Kolkata");
+            timezoneName.setText("Maldives/Male");
         }
 
         homeCityStr = homeCity.getText().toString();
 
         SharedPreferences.Editor editor = myPrefs.edit();
-
-        editor.putString("textView8", homeCityStr);
-        editor.commit();
+        editor.putString("textView3", homeCityStr);
+        editor.apply();
     }
 
     @Override
     public void onNothingSelected(AdapterView<?> parent) {
 
+    }
+
+    public void mainActivity(View view) {
+        Intent intent = new Intent(HitsActivity.this, MainActivity.class);
+        startActivity(intent);
     }
 }
 

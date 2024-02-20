@@ -27,7 +27,7 @@
         <item>Asia/Singapore</item>
         <item>Asia/Tokyo</item>
         <item>Australia/Canberra</item>
-        <item>India/Kolkata</item>
+        <item>Maldives/Male</item>
     </string-array>
     <string-array name="times_2_array">
         <item>GMT -5:00</item>

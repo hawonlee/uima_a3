@@ -1,5 +1,7 @@
 package com.example.emptyviewstemplate;
 
+import static android.text.TextUtils.isEmpty;
+
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
@@ -15,9 +17,15 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.TimePicker;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+
 import java.util.Locale;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import org.w3c.dom.Text;
 
 public class MainActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
@@ -44,6 +52,26 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         spinner.setOnItemSelectedListener(this);
 
         timeButton = findViewById(R.id.timeButton);
+        Date currentTime = Calendar.getInstance().getTime();
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd_HHmmss", Locale.getDefault());
+        String currentTimeStr = new SimpleDateFormat("HH:mm:ss", Locale.getDefault()).format(new Date());
+
+        hour = Integer.parseInt(currentTimeStr.substring(0, 2));
+        minute = Integer.parseInt(currentTimeStr.substring(3, 5));
+
+        String am_pm = "am";
+        if (hour > 12) {
+            am_pm = "pm";
+            hour = hour % 12;
+        }
+
+        String setTime = hour + currentTimeStr.substring(2, 5) + " " + am_pm;
+        timeButton.setText(setTime);
+
+        convertTime();
+
+        TextView convertTimeZone = (TextView) findViewById(R.id.textView5);
+        //convertTimeZone.setText();
 
         /* SharedPreferences at activity only level, not shared by others
         myPrefs = this.getPreferences(Activity.MODE_PRIVATE);
@@ -59,7 +87,10 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
 
         myPrefs = getApplicationContext().getSharedPreferences("myUserPrefs", Context.MODE_PRIVATE);
-        homeCity = myPrefs.getString("homeCity", "");
+        peditor = myPrefs.edit();
+        peditor.putString("homeCity", "America/New_York");
+        peditor.apply();
+        //homeCity = myPrefs.getString("homeCity", "");
 
         /*
         super.onCreate(savedInstanceState);
@@ -67,15 +98,70 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         */
     }
 
+    @SuppressLint("SetTextI18n")
     public void convertTime() {
-        TextView timezone = (TextView) findViewById(R.id.textView10);
-        SharedPreferences.Editor peditor = myPrefs.edit();
+        TextView timezoneName = (TextView) findViewById(R.id.textView4);
+        TextView timezone = (TextView) findViewById(R.id.textView5);
+        int newHour = hour;
+        int newMin = minute;
 
 
 
-        //int newHour =
+        if (isEmpty(homeCity)) {
+            timezone.setText("GMT -08:00");
+            timezoneName.setText("America/Los_Angeles");
+            newHour = hour - 8;
+        } else {
+            homeCity = myPrefs.getString("homeCity", "");
+            if (homeCity.equals("America/New_York")) {
+                timezone.setText("GMT -05:00");
+                timezoneName.setText("America/New_York");
+                newHour = hour - 5;
+            } else if (homeCity.equals("Maldives/Male")){
+                timezone.setText("GMT +05:00");
+                timezoneName.setText("Maldives/Male");
+                newHour = hour + 5;
+            } else if (homeCity.equals("Europe/Berlin")) {
+                timezone.setText("GMT +01:00");
+                timezoneName.setText("Europe/Berlin");
+                newHour = hour + 1;
+            } else if (homeCity.equals("Europe/Istanbul")) {
+                timezone.setText("GMT +02:00");
+                timezoneName.setText("Europe/Istanbul");
+                newHour = hour + 2;
+            } else if (homeCity.equals("Asia/Singapore")) {
+                timezone.setText("GMT +08:00");
+                timezoneName.setText("Asia/Singapore");
+                newHour = hour + 8;
+            } else if (homeCity.equals("Asia/Tokyo")) {
+                timezone.setText("GMT +09:00");
+                timezoneName.setText("Asia/Tokyo");
+                newHour = hour + 9;
+            } else if (homeCity.equals("Australia/Canberra")) {
+                timezone.setText("GMT +10:00");
+                timezoneName.setText("Australia/Canberra");
+                newHour = hour + 10;
+            } else {
+                timezone.setText("GMT -08:00");
+                timezoneName.setText("America/Los_Angeles");
+                newHour = hour - 8;
+            }
+        }
 
-        timezone.setText(String.format(Locale.getDefault(), "%02d:%02d",hour, minute));
+        String am_pm = "am";
+        if (newHour > 12) {
+            am_pm = "pm";
+            newHour = newHour % 12;
+        }
+
+        if (newHour < 0) {
+            newHour += 12;
+        }
+
+
+        TextView convertedTime = (TextView) findViewById(R.id.textView10);
+        String setConvertedTime = String.format(Locale.getDefault(), "%02d:%02d",newHour, minute) + " " + am_pm;
+        convertedTime.setText(setConvertedTime);
     }
 
     public void popTimePicker(View view)
@@ -143,14 +229,6 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     protected void onDestroy() {
         // do stuff here
         super.onDestroy();
-    }
-
-    /** Called when the user clicks the HITME button */
-    public void hitme(View view) {
-        // Do something in response to button
-
-        Intent intent = new Intent(MainActivity.this, HitsActivity.class);
-        startActivity(intent);
     }
 
     @SuppressLint("SetTextI18n")
